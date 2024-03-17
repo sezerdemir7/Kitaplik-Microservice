@@ -25,19 +25,19 @@ public class BookController {
 
 
     @GetMapping
-    public ResponseEntity<List<BookDto>> getAllBook(){
+    public ResponseEntity<List<BookDto>> getAllBook() {
         return ResponseEntity.ok(bookService.getAllBooks());
     }
 
     @GetMapping("/isbn/{isbn}")
-    public ResponseEntity<BookIdDto> getBookByIsbn(@PathVariable @NotEmpty String isbn){
+    public ResponseEntity<BookIdDto> getBookByIsbn(@PathVariable @NotEmpty String isbn) {
         return ResponseEntity.ok(bookService.findByIsbn(isbn));
     }
+
     @GetMapping("/book/{id}")
-    public ResponseEntity<BookDto> getBookById(@PathVariable @NotEmpty String id){
+    public ResponseEntity<BookDto> getBookById(@PathVariable @NotEmpty String id) {
         return ResponseEntity.ok(bookService.findBookDetailsById(id));
     }
-
 
 
 }

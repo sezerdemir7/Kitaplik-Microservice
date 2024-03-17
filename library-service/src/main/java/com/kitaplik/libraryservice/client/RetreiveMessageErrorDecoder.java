@@ -11,7 +11,8 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-@Component
+
+
 public class RetreiveMessageErrorDecoder implements ErrorDecoder {
 
     private final ErrorDecoder errorDecoder = new Default();
@@ -26,6 +27,8 @@ public class RetreiveMessageErrorDecoder implements ErrorDecoder {
                     IOUtils.toString(body, StandardCharsets.UTF_8),
                     response.request().url());
 
+            // System.out.println(message);
+
         } catch (IOException exception) {
             return new Exception(exception.getMessage());
         }
@@ -36,5 +39,6 @@ public class RetreiveMessageErrorDecoder implements ErrorDecoder {
                 return errorDecoder.decode(methodKey, response);
         }
     }
-
 }
+
+

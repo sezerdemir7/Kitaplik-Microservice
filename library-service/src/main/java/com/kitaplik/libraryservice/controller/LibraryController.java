@@ -5,6 +5,8 @@ import com.kitaplik.libraryservice.dto.LibraryDto;
 import com.kitaplik.libraryservice.service.LibraryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RefreshScope
 @RequestMapping("/v1/library")
 public class LibraryController {
 
@@ -25,6 +28,9 @@ public class LibraryController {
         this.libraryService = libraryService;
         this.environment = environment;
     }
+
+    @Value("${library.service.count}")
+    private Integer count;
 
 
     @GetMapping("/{id}")
@@ -48,6 +54,11 @@ public class LibraryController {
     @GetMapping
     public ResponseEntity<List<String >> getAllLibraries(){
         return ResponseEntity.ok(libraryService.getAllLibraries());
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<String> getCount(){
+        return ResponseEntity.ok("Library service count : "+count);
     }
 
 }
